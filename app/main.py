@@ -22,9 +22,10 @@ if uploaded_file:
         if st.button("Run AutoML"):
             st.info("Training in progress... please wait ⏳")
 
-            results = run_automl(df, target_col, task)
-
+            #results = run_automl(df, target_col, task)
+            results, best_model_name, best_score, best_model_obj = run_automl(df, target_col, task)
             st.success("Training complete! 🎉")
 
             st.subheader("Model Performance Leaderboard")
+            st.success(f"🏆 Best Model: `{best_model_name}` with score: `{round(best_score, 4)}`")
             st.table(pd.DataFrame(results, columns=["Model", "Score"]))
